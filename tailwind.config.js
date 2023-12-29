@@ -1,8 +1,8 @@
-// Used for tailwind VS Code extension only
+// Used by tailwind VS Code extension
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./client/**/*.{html,js,.templ}"],
+  content: [],
   theme: {
     extend: {},
   },
