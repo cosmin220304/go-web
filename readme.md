@@ -14,7 +14,7 @@ Besides the app itself, there is also some tools and code for better developer e
 ### How to generate templates:
 
 ```bash
-~/go/bin/templ generate
+templ generate
 ```
 
 ### How to run the server:
@@ -34,5 +34,5 @@ npm install -g nodemon
 2. run bash script:
 
 ```bash
-./run.sh
+./start.sh
 ```
