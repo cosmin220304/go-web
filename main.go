@@ -1,7 +1,8 @@
 package main
 
 import (
-	todos "go-web/todos"
+	"go-web/api/todo"
+	"go-web/data"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
@@ -9,21 +10,19 @@ import (
 )
 
 func main() {
+	data.ConnectDb()
+
 	app := fiber.New()
 	app.Static("/", "./public")
 
-	app.Get("/", func(ctx *fiber.Ctx) error {
-		return ctx.SendFile("./todos/index.html")
-	})
+	todo.Handle(app)
 
 	// Handle the WebSocket connection, used for live updates in development mode
-	if os.Getenv("APP_ENV") == "development" {
+	if os.Getenv("APP_ENV") == "" {
 		app.Get("/ws", websocket.New(func(ctx *websocket.Conn) {
 			ctx.ReadMessage()
 		}))
 	}
-
-	todos.Handle(app)
 
 	panic(app.Listen(":3000"))
 }
