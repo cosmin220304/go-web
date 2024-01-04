@@ -12,7 +12,7 @@ func Handle(app fiber.Router) {
 
 	app.Get("/todos/:id", todo.HandleGetItemTemplate)
 
-	app.Post("/todo", todo.HandlePostTodoItem)
+	app.Post("/todos", todo.HandlePostTodoItem)
 
 	app.Delete("/todos/:id", todo.HandleDeleteTodoItem)
 }

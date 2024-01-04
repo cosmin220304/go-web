@@ -3,26 +3,26 @@ package todo
 import "strconv"
 import "go-web/model"
 
-templ todoForm(todos []model.Todo) {
-	<form hx-post="/todo" hx-trigger="submit" hx-target="#newTodo" hx-swap="beforebegin" hx-on::after-request="this.reset()">
+templ TodoForm(todos []model.Todo) {
+	<form hx-post="/todos" hx-trigger="submit" hx-target="#newTodo" hx-swap="beforebegin" hx-on::after-request="this.reset()">
 		<input type="text" name="name" class="border border-gray-400 rounded-lg px-4 py-2 mt-4" required/>
 		<button type="submit" class="border border-gray-400 rounded-lg px-4 py-2 mt-4">
 			Add
 		</button>
 	</form>
-	@todosList(todos)
+	@TodosList(todos)
 }
 
-templ todosList(todos []model.Todo) {
+templ TodosList(todos []model.Todo) {
 	<ul class="flex flex-col items-center gap-2">
 		for _, todo := range todos {
-			@todoItem(todo)
+			@TodoItem(todo)
 		}
 		<div id="newTodo"></div>
 	</ul>
 }
 
-templ todoItem(todo model.Todo) {
+templ TodoItem(todo model.Todo) {
 	<li id={ "todo-" + strconv.Itoa(int(todo.ID)) } hx-target="this" class="ring-1 flex justify-between w-full">
 		{ todo.Name }
 		<button

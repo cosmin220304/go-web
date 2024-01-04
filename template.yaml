@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  MyFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: main
+      Runtime: go1.x
+      CodeUri: .
+      Events:
+        Root:
+          Type: Api
+          Properties:
+            Path: /
+            Method: any
+        TodoForm:
+          Type: Api
+          Properties:
+            Path: /todo-form
+            Method: any
+        TodoItem:
+          Type: Api
+          Properties:
+            Path: /todos/{id}
+            Method: any
+        Todos:
+          Type: Api
+          Properties:
+            Path: /todos
+            Method: any

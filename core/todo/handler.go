@@ -2,13 +2,14 @@ package todo
 
 import (
 	"go-web/model"
+	util "go-web/util"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 func HandleGetFormTemplate(ctx *fiber.Ctx) error {
 	todos := GetTodos()
-	template, ok := TodoFormTemplate(todos, ctx)
+	template, ok := util.GetTemplate(ctx, TodoForm(todos))
 	if !ok {
 		return ctx.Status(fiber.StatusInternalServerError).SendString("Internal Server Error")
 	}
@@ -18,12 +19,12 @@ func HandleGetFormTemplate(ctx *fiber.Ctx) error {
 func HandleGetItemTemplate(ctx *fiber.Ctx) error {
 	id := ctx.Params("id")
 
-	item, ok := GetTodoById(id)
+	todoItem, ok := GetTodoById(id)
 	if !ok {
 		return ctx.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "Todo item not found"})
 	}
 
-	template, ok := TodoItemTemplate(item, ctx)
+	template, ok := util.GetTemplate(ctx, TodoItem(todoItem))
 	if !ok {
 		return ctx.Status(fiber.StatusInternalServerError).SendString("Internal Server Error")
 	}
@@ -41,7 +42,7 @@ func HandlePostTodoItem(ctx *fiber.Ctx) error {
 		return ctx.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to create todo item"})
 	}
 
-	template, ok := TodoItemTemplate(createdTodo, ctx)
+	template, ok := util.GetTemplate(ctx, TodoItem(createdTodo))
 	if !ok {
 		return ctx.Status(fiber.StatusInternalServerError).SendString("Internal Server Error")
 	}

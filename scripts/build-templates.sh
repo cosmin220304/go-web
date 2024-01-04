@@ -1,0 +1,1 @@
+nodemon --watch '*.templ' --exec 'templ generate' --ext 'templ'

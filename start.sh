@@ -1,1 +1,0 @@
-nodemon --watch '*.go' --watch '*.html' --exec 'go run main.go' --ext 'go,html' & nodemon --watch '*.templ' --exec 'templ generate' --ext 'templ'
